@@ -11,5 +11,5 @@
 <Bagel />
 <Plot />
 <Plan />
-<WidgetWide />
+<Widget />
 <MonthStatistics />
