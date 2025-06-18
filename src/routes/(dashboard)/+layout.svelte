@@ -14,7 +14,7 @@
 			<p>ЗАО "Бещёки"</p>
 		</div>
 	</div>
-	<div class="w-full h-full">
+	<div class="w-full h-full flex flex-row">
 		<div class="w-24 h-full border-r flex flex-col p-4 items-center gap-4">
 			<TextIconH 
 				style="border-black w-14 h-14"
@@ -47,7 +47,7 @@
 				text="Загрузка данных"
 			/>
 		</div>
-		<div>
+		<div class="w-full h-full overflow-auto py-3.5 px-5 grid grid-rows-2 grid-flow-col auto-cols-fr gap-4">
 			{@render children()}
 		</div>
 	</div>
