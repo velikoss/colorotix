@@ -25,6 +25,7 @@
 
             if (response.ok) {
                 // Redirect to a protected page (e.g., user profile)
+                localStorage.setItem('companyId', String(result.companyId));
                 goto("/");
             } else {
                 error = result.error || "Ошибка входа";

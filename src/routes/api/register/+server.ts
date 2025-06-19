@@ -22,17 +22,18 @@ export const POST: RequestHandler = async ({ request }) => {
   const passwordHash = await bcrypt.hash(password, 10);
 
   const TABLE_PREFIX = 'c_';
-  let raw = crypto.createHash('sha1').update(innnumber, 'utf8').digest('hex').slice(0, 8);
-  let clientId = `${TABLE_PREFIX}${raw}`;
+  const raw = crypto.createHash('sha1').update(innnumber, 'utf8').digest('hex').slice(0, 8);
+  const clientId = `${TABLE_PREFIX}${raw}`;
 
+  // companyId точно сохраняется
   await prisma.user.create({
     data: {
-      email: name,
+      email: name.toLowerCase(),
       passwordHash,
       companyName: companyname,
       inn: innnumber,
       companyId: clientId,
-      companyType: companyType
+      companyType
     }
   });
 

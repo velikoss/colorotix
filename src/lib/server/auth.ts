@@ -6,6 +6,7 @@ export function createJwt(userId: number) {
   return jwt.sign({ userId }, secret, { expiresIn: '7d' });
 }
 
-export function verifyJwt(token: string) {
-  return jwt.verify(token, secret) as { userId: number };
+export function verifyJwt(token: string): { id: number } {
+	const payload = jwt.verify(token, process.env.JWT_SECRET!) as { id: number };
+	return payload;
 }
