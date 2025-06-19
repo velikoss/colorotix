@@ -6,6 +6,7 @@
 	import Legend from "./Legend.svelte";
 	import { onMount } from "svelte";
     import { interpolateRgb } from "d3-interpolate";
+    import { translations } from "$lib";
 
 	const props = $props<{ data: any[]; color: string; value: string }>();
 
@@ -56,7 +57,7 @@
 		tooltip.visible = true;
 		tooltip.x = event.offsetX + 5; // Offset to avoid cursor overlap
 		tooltip.y = event.offsetY + 5;
-		tooltip.content = `${arc.data[props.color]}: ${parseFloat(arc.data[props.value]).toFixed(2)}`;
+		tooltip.content = `${(translations[arc.data[props.color]] as string)}: ${parseFloat(arc.data[props.value]).toFixed(2)}`;
 	}
 
 	function moveTooltip(event: MouseEvent) {
@@ -69,9 +70,9 @@
 	}
 </script>
 
-<div class="w-full h-full flex flex-col relative">
+<div class="w-full h-full flex flex-col relative overflow-visible">
 	<div
-		class="w-full h-full"
+		class="w-full h-full overflow-visible"
 		bind:clientWidth={width}
 		bind:clientHeight={height}
 	>

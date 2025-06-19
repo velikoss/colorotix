@@ -1,5 +1,5 @@
 <script>
-    import Widget from "$lib/d3/Widget.svelte";
+    import Widget from "$lib/breadcrumps/Widget.svelte";
     import { fuel_km_per_month } from "$lib/fuel_km_per_month";
 
     let currentMonth = $state("05");
@@ -104,9 +104,9 @@
     });
 </script>
 
-<Widget style="text-white flex-col items-start pt-14">
+<Widget style="text-white flex-col items-start p-10 pt-16">
     <div
-        class="pt-4 absolute top-0 w-full inset-x-0 h-10 text-center text-xl flex flex-row justify-between items-center px-12"
+        class="pt-4 absolute top-1.5 w-full inset-x-0 h-10 text-center text-xl flex flex-row justify-between items-center px-12"
     >
         <button
             onclick={findPreviousAvailableMonth}

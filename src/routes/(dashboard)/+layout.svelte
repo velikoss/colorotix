@@ -4,17 +4,50 @@
 	import '../../app.css';
 	
 	let { children } = $props();
+	let accountDropdown = $state(false);
+	let accWidth = $state(0); 
+
+	// Close dropdown when clicking outside
+	function handleClickOutside(event: MouseEvent) {
+		if (!(event.target as HTMLElement).closest('.dropdown-container')) {
+			accountDropdown = false;
+		}
+	}
 </script>
 
+<svelte:window on:click={handleClickOutside} />
+
 <div class="onest w-full max-w-screen h-screen bg-white overflow-hidden flex flex-col">
-	<div class="border-b w-full h-24 flex flex-row items-center justify-between px-6 overflow-hidden">
+	<div class="border-b w-full h-24 flex flex-row items-center justify-between px-6 overflow-visible">
 		<img src="https://www.petrolplus.ru/assets/1c2c5e66-a8ac-40ed-9a93-55865669bd85/logo-black.svg" class="w-50 h-8 object-contain object-left">
-		<div class="w-full flex flex-row gap-1.5 justify-end">
-			<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItaWNvbiBsdWNpZGUtdXNlciI+PHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4=">
-			<p>ЗАО "Бещёки"</p>
+		<div class="w-fit flex flex-row gap-1.5 justify-end items-center dropdown-container" bind:clientWidth={accWidth}>
+			<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXVzZXItaWNvbiBsdWNpZGUtdXNlciI+PHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4=" class="w-6 h-6">
+			<div class="relative overflow-visible">
+				<button 
+					onclick={() => accountDropdown = !accountDropdown}
+					class="flex items-center gap-2 text-gray-700 hover:text-gray-900 font-medium"	
+				>
+					ЗАО "Бещёки"
+					<svg class="w-4 h-4 transition-transform {accountDropdown ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+					</svg>
+				</button>
+				{#if accountDropdown}
+					<div class="absolute right-0 mt-2 w-(--width) bg-white border border-gray-200 rounded-md shadow-lg z-10" style="--width: {accWidth}px">
+						<ul class="py-1">
+						<li>
+								<a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Настройки</a>
+							</li>
+							<li>
+								<a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Выйти</a>
+							</li>
+						</ul>
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
-	<div class="w-full h-full flex flex-row">
+	<div class="w-full h-[calc(100svh-6rem)] flex flex-row">
 		<div class="w-24 h-full border-r flex flex-col p-4 items-center gap-4">
 			<TextIconH 
 				style="border-black w-14 h-14"
@@ -47,7 +80,7 @@
 				text="Загрузка данных"
 			/>
 		</div>
-		<div class="w-full h-full overflow-auto py-3.5 px-5 grid grid-rows-2 grid-flow-col auto-cols-fr gap-4">
+		<div class="w-full h-full overflow-auto py-3.5 px-5 grid sm:grid-cols-1 md:grid-rows-2 md:grid-flow-col md:auto-cols-fr gap-4">
 			{@render children()}
 		</div>
 	</div>

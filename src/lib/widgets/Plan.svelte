@@ -1,7 +1,7 @@
 <script lang="ts">
     import Arc from "$lib/d3/Arc.svelte";
     import Chart from "$lib/d3/Chart.svelte";
-    import Widget from "$lib/d3/Widget.svelte";
+    import Widget from "$lib/breadcrumps/Widget.svelte";
     import { expenses_data } from "$lib/expenses_data";
 
     let width = $state(0);

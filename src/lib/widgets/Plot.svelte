@@ -1,81 +1,137 @@
 <script lang="ts">
-  import Multiline from '$lib/d3/Multiline.svelte';
-  import Widget from '$lib/d3/Widget.svelte';
-    import WidgetWide from '$lib/d3/WidgetWide.svelte';
-  import { expenses_analisys_results } from '$lib/expenses_analysis_results';
+    import Multiline from "$lib/d3/Multiline.svelte";
+    import Widget from "$lib/breadcrumps/Widget.svelte";
+    import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
+    import { expenses_analisys_results } from "$lib/expenses_analysis_results";
 
-  const { historical_data, forecast_data } = expenses_analisys_results;
+    // Extract data from the new JSON structure
+    const { data } = expenses_analisys_results;
+    const { x_axis, y_axis, outliers, forecast } = data;
 
-  const data = [
-    ...historical_data.normal_points.map(d => ({
-      date: new Date(d.date),
-      value: d.actual,
-      type: 'main',
-      segment: 'historical'
-    })),
-    ...forecast_data.map(d => ({
-      date: new Date(d.date),
-      value: d.prediction,
-      type: 'main',
-      segment: 'forecast'
-    })),
-    ...historical_data.outliers.map(d => ({
-      date: new Date(d.date),
-      value: d.actual,
-      type: 'outlier'
-    })),
-    ...forecast_data.map(d => ({
-      date: new Date(d.date),
-      value: d.lower_bound,
-      type: 'lower_bound'
-    })),
-    ...forecast_data.map(d => ({
-      date: new Date(d.date),
-      value: d.upper_bound,
-      type: 'upper_bound'
-    }))
-  ].sort((a, b) => a.date.getTime() - b.date.getTime());
+    // Combine historical data, outliers, and forecast data
+    const historicalData = x_axis.values.map((date: string, index: number) => ({
+        date,
+        actual: y_axis.values[index],
+    }));
 
-  // Improved xFormat for readable dates
-  const xFormat = (d: Date) => {
-    return new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }); // e.g., "Jan 2019"
-  };
+    // Identify outliers by their x values
+    const outlierDates = new Set(outliers.x);
+    const normalPoints = historicalData.filter((d) => !outlierDates.has(d.date));
+    const outlierPoints = historicalData.filter((d) => outlierDates.has(d.date));
 
-  const yFormat = (d: number) => {
-    return `${(d / 1000000).toFixed(1)}M`;
-  };
+    // Forecast data
+    const forecastData = forecast.x.map((date: string, index: number) => ({
+        date,
+        prediction: forecast.yhat[index],
+        lower_bound: forecast.yhat_lower[index],
+        upper_bound: forecast.yhat_upper[index],
+    }));
 
-  // Adjusted margins for better spacing
-  const margins = {
-    top: 40,    // Increased for y-axis label
-    right: 40,  // Unchanged
-    bottom: 40, // Reduced, adjusted for x-axis labels
-    left: 80  // Unchanged
-  };
+    const data1 = [
+        ...normalPoints.map((d) => ({
+            date: new Date(d.date),
+            value: d.actual,
+            type: "main",
+            segment: "historical",
+        })),
+        ...forecastData.map((d) => ({
+            date: new Date(d.date),
+            value: d.prediction,
+            type: "main",
+            segment: "forecast",
+        })),
+        ...outlierPoints.map((d) => ({
+            date: new Date(d.date),
+            value: d.actual,
+            type: "outlier",
+        })),
+        ...forecastData.map((d) => ({
+            date: new Date(d.date),
+            value: d.lower_bound,
+            type: "lower_bound",
+        })),
+        ...forecastData.map((d) => ({
+            date: new Date(d.date),
+            value: d.upper_bound,
+            type: "upper_bound",
+        })),
+    ].sort((a, b) => a.date.getTime() - b.date.getTime());
 
-  const colorPalette = {
-    main_historical: '#1f77b4',
-    main_forecast: '#2ca02c',
-    outlier: '#ff1b1b',
-    lower_bound: '#d62728',
-    upper_bound: '#9467bd'
-  };
+    // Improved xFormat for readable dates
+    const xFormat = (d: Date) => {
+        return new Date(d).toLocaleDateString("en-US", {
+            month: "short",
+            year: "numeric",
+        }); // e.g., "Jan 2019"
+    };
+
+    // Dynamic yFormat based on value magnitude
+    const yFormat = (d: number) => {
+        const absValue = Math.abs(d);
+        if (absValue >= 1_000_000_000) {
+            return `${(d / 1_000_000_000).toFixed(1)}B`;
+        } else if (absValue >= 1_000_000) {
+            return `${(d / 1_000_000).toFixed(1)}M`;
+        } else if (absValue >= 1_000) {
+            return `${(d / 1_000).toFixed(1)}K`;
+        }
+        return `${d.toFixed(1)}`;
+    };
+
+    const margins = {
+        top: 10,
+        right: 20,
+        bottom: 10,
+        left: 60,
+    };
+
+    const margins2 = {
+        top: 40,
+        right: 40,
+        bottom: 40,
+        left: 80,
+    };
+
+    const colorPalette = {
+        main_historical: "#1f77b4",
+        main_forecast: "#2ca02c",
+        outlier: "#ff1b1b",
+        lower_bound: "#d62728",
+        upper_bound: "#9467bd",
+    };
 </script>
 
-<WidgetWide>
-<Multiline
-    {data}
-    x="date"
-    y="value"
-    color="type"
-    {xFormat}
-    {yFormat}
-    {margins}
-    colorPalette={Object.values(colorPalette)}
-  />
-</WidgetWide>
+<div class="hidden md:block">
+    <WidgetWide style="">
+        <Multiline
+            data={data1}
+            x="date"
+            y="value"
+            color="type"
+            {xFormat}
+            {yFormat}
+            margins={margins2}
+            colorPalette={Object.values(colorPalette)}
+        />
+    </WidgetWide>
+</div>
+<div class="block md:hidden">
+    <Widget style="">
+        <Multiline
+            data={data1}
+            x="date"
+            y="value"
+            color="type"
+            {xFormat}
+            {yFormat}
+            {margins}
+            colorPalette={Object.values(colorPalette)}
+        />
+    </Widget>
+</div>
+
 <style>
-  :global(:root) {
-    --colors-grid: #FFFFFF;
-  }
+    :global(:root) {
+        --colors-grid: #ffffff;
+    }
 </style>

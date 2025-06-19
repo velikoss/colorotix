@@ -1,7 +1,7 @@
 <script>
     import { formatNumber } from "$lib";
     import Arcs from "$lib/d3/Arcs.svelte";
-    import Widget from "$lib/d3/Widget.svelte";
+    import Widget from "$lib/breadcrumps/Widget.svelte";
     import { expenses_data } from "$lib/expenses_data";
     import { onMount } from "svelte";
 

@@ -7,7 +7,7 @@
 </script>
 
 <div class="relative w-[48rem] h-94 flex flex-row justify-between">
-    <div class="absolute left-1/3 h-94 bg-black w-60"></div>
+    <div class="absolute left-1/3 h-94 bg-black w-60 z-0"></div>
     <Widget />
     <Widget />
     <div class="absolute w-full h-full">

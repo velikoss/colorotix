@@ -5,7 +5,7 @@
 
 </script>
 
-<div class={twMerge("w-94 h-94 clip bg-black flex justify-center-safe items-center-safe overflow-visible p-8 relative", style)}>
+<div class={twMerge("w-94 h-94 clip bg-black flex justify-center items-center overflow-visible p-8 relative", style)}>
     {#if children}
         {@render children()}
     {/if}
