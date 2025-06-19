@@ -27,7 +27,7 @@
                 // Redirect to a protected page (e.g., user profile)
                 goto("/");
             } else {
-                error = result.error || "Login failed";
+                error = result.error || "Ошибка входа";
             }
         } catch (err) {
             error = "An unexpected error occurred";

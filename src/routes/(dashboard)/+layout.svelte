@@ -1,8 +1,9 @@
 <script lang="ts">
-    import Card from '$lib/breadcrumps/Card.svelte';
-    import TextIconH from '$lib/breadcrumps/TextIconH.svelte';
+	import Card from '$lib/breadcrumps/Card.svelte';
+	import TextIconH from '$lib/breadcrumps/TextIconH.svelte';
+	import { goto } from '$app/navigation';
 	import '../../app.css';
-	
+
 	let { children } = $props();
 	let accountDropdown = $state(false);
 	let accWidth = $state(0); 
@@ -15,7 +16,6 @@
 	}
 </script>
 
-<svelte:window on:click={handleClickOutside} />
 
 <div class="onest w-full max-w-screen h-screen bg-white overflow-hidden flex flex-col">
 	<div class="border-b w-full h-24 flex flex-row items-center justify-between px-6 overflow-visible">
@@ -53,7 +53,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="w-full h-[calc(100svh-6rem)] flex flex-row">
+	<div class="w-full h-full flex flex-row">
 		<div class="w-24 h-full border-r flex flex-col p-4 items-center gap-4">
 			<TextIconH 
 				style="border-black w-14 h-14"
@@ -86,7 +86,7 @@
 				text="Загрузка данных"
 			/>
 		</div>
-		<div class="w-full h-full overflow-auto py-3.5 px-5 grid sm:grid-cols-1 md:grid-rows-2 md:grid-flow-col md:auto-cols-fr gap-4">
+		<div class="w-full h-full overflow-auto py-3.5 px-5 grid grid-rows-2 grid-flow-col auto-cols-fr gap-4">
 			{@render children()}
 		</div>
 	</div>
