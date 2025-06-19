@@ -1,20 +1,48 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
-    import Card from "$lib/breadcrumps/Card.svelte";
+	import { goto } from '$app/navigation';
+	import Card from '$lib/breadcrumps/Card.svelte';
 
-    // todo states
-    let name = $state("");
-    let password = $state("");
-    let companyname = $state("");
-    let innnumber = $state("");
-    let error = $state("");
-    let loading = false;
+	// обычные реактивные переменные Svelte
+	let name = '';
+	let password = '';
+	let companyname = '';
+	let innnumber = '';
+	let error = '';
+	let loading = false;
 
-    const input = "w-full border rounded-lg px-4 py-2 outline-none transition-all duration-200 bg-white/10 not-focus:border-gray-900/30 focus:border-gray-900/80 focus:ring-gray-900/30 placeholder:text-gray-900 placeholder:opacity-100 backdrop-blur-sm shadow shadow-white/5";
+	const input =
+		'w-full border rounded-lg px-4 py-2 outline-none transition-all duration-200 bg-white/10 not-focus:border-gray-900/30 focus:border-gray-900/80 focus:ring-gray-900/30 placeholder:text-gray-900 placeholder:opacity-100 backdrop-blur-sm shadow shadow-white/5';
 
-    async function handleRegister(e: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }) {
-        e.preventDefault();
-    }
+	async function handleRegister(e: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }) {
+		e.preventDefault();
+		loading = true;
+		error = '';
+
+		try {
+			const response = await fetch('/api/register', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					name,
+					password,
+					companyname,
+					innnumber
+				})
+			});
+
+			const result = await response.json();
+
+			if (response.ok) {
+				goto('/');
+			} else {
+				error = result.error || 'Ошибка при регистрации';
+			}
+		} catch (err) {
+			error = 'Неожиданная ошибка. Попробуйте позже.';
+		} finally {
+			loading = false;
+		}
+	}
 </script>
 
 <div
