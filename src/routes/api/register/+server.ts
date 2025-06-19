@@ -2,10 +2,10 @@ import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 import prisma from '$lib/server/prisma';
-const crypto = require('crypto');
+const crypto = await import('crypto');
 
 export const POST: RequestHandler = async ({ request }) => {
-  const { name, password, companyname, innnumber } = await request.json();
+  const { name, password, companyname, innnumber, companyType } = await request.json();
 
   if (!name || !password || !companyname || !innnumber) {
     return json({ error: 'Заполните все поля' }, { status: 400 });
@@ -31,7 +31,8 @@ export const POST: RequestHandler = async ({ request }) => {
       passwordHash,
       companyName: companyname,
       inn: innnumber,
-      companyId: clientId
+      companyId: clientId,
+      companyType: companyType
     }
   });
 

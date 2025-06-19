@@ -17,6 +17,7 @@ model User {
   passwordHash String   @map("passwordhash")
   companyName  String?  @map("companyname")
   inn          String?
+  companyType  String?
   companyId    String?  @map("companyid")
   createdAt    DateTime @default(now()) @db.Timestamptz(6) @map("createdat")
 

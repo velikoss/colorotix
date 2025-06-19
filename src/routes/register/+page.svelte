@@ -2,16 +2,17 @@
 	import { goto } from '$app/navigation';
 	import Card from '$lib/breadcrumps/Card.svelte';
 
-	// обычные реактивные переменные Svelte
-	let name = '';
-	let password = '';
-	let companyname = '';
-	let innnumber = '';
-	let error = '';
-	let loading = false;
+	let name = $state('');
+	let password = $state('');
+	let companyname = $state('');
+	let innnumber = $state('');
+	let error = $state('');
+    let companyType = $state();
+	let loading = $state(false);
 
-	const input =
-		'w-full border rounded-lg px-4 py-2 outline-none transition-all duration-200 bg-white/10 not-focus:border-gray-900/30 focus:border-gray-900/80 focus:ring-gray-900/30 placeholder:text-gray-900 placeholder:opacity-100 backdrop-blur-sm shadow shadow-white/5';
+    const types = ["Логистика", "Фармацевтика", "Строительство", "Ритейл", "Такси", "Доставка", "Автобусы", "Каршеринг", "Другое"];
+
+	const input = 'w-full border rounded-lg px-4 py-2 outline-none transition-all duration-200 bg-white/10 not-focus:border-gray-900/30 focus:border-gray-900/80 focus:ring-gray-900/30 placeholder:text-gray-900 placeholder:opacity-100 backdrop-blur-sm shadow shadow-white/5';
 
 	async function handleRegister(e: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }) {
 		e.preventDefault();
@@ -26,7 +27,8 @@
 					name,
 					password,
 					companyname,
-					innnumber
+					innnumber,
+                    companyType
 				})
 			});
 
@@ -53,6 +55,7 @@
     >
         <img
             src="https://www.petrolplus.ru/assets/1c2c5e66-a8ac-40ed-9a93-55865669bd85/logo-black.svg"
+            alt=""
         />
         <div class="h-[1px] w-full bg-gray-300 my-6"></div>
         <form onsubmit={handleRegister} class="space-y-4">
@@ -106,6 +109,22 @@
                     class={input}
                     required
                 />
+            </div>
+
+            <div>
+                <label for="companyType" class="block text-gray-900 font-medium"
+                    >Сфера деятельности</label
+                >
+                <select
+                    id="companyType"
+                    bind:value={companyType}
+                    class={input}
+                    required
+                >
+                {#each types as type}
+                    <option>{type}</option>
+                {/each}
+                </select>
             </div>
 
             {#if error}
