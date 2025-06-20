@@ -4,22 +4,22 @@
     import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
     import { expenses_analisys_results } from "$lib/expenses_analysis_results";
 
-    // Extract data from the new JSON structure
+   
     const { data } = expenses_analisys_results;
     const { x_axis, y_axis, outliers, forecast } = data;
 
-    // Combine historical data, outliers, and forecast data
+   
     const historicalData = x_axis.values.map((date: string, index: number) => ({
         date,
         actual: y_axis.values[index],
     }));
 
-    // Identify outliers by their x values
+   
     const outlierDates = new Set(outliers.x);
     const normalPoints = historicalData.filter((d) => !outlierDates.has(d.date));
     const outlierPoints = historicalData.filter((d) => outlierDates.has(d.date));
 
-    // Forecast data
+   
     const forecastData = forecast.x.map((date: string, index: number) => ({
         date,
         prediction: forecast.yhat[index],
@@ -57,15 +57,15 @@
         })),
     ].sort((a, b) => a.date.getTime() - b.date.getTime());
 
-    // Improved xFormat for readable dates
+   
     const xFormat = (d: Date) => {
         return new Date(d).toLocaleDateString("en-US", {
             month: "short",
             year: "numeric",
-        }); // e.g., "Jan 2019"
+        });
     };
 
-    // Dynamic yFormat based on value magnitude
+   
     const yFormat = (d: number) => {
         const absValue = Math.abs(d);
         if (absValue >= 1_000_000_000) {
@@ -93,15 +93,15 @@
     };
 
     const colorPalette = {
-        main_historical: "#1f77b4",
+        main_historical: "#6BFCBA",
         main_forecast: "#2ca02c",
-        outlier: "#ff1b1b",
+        outlier: "#1f77b4",
         lower_bound: "#d62728",
         upper_bound: "#9467bd",
     };
 </script>
 
-<div class="hidden md:block">
+<div class="hidden md:block col-span-2">
     <WidgetWide style="">
         <Multiline
             data={data1}
@@ -115,7 +115,7 @@
         />
     </WidgetWide>
 </div>
-<div class="block md:hidden">
+<div class="block md:hidden col-span-1">
     <Widget style="">
         <Multiline
             data={data1}

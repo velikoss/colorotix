@@ -2,14 +2,14 @@
 	import Input from "$lib/breadcrumps/Input.svelte";
 	import Widget from "$lib/breadcrumps/Widget.svelte";
 
-	/* строка подключения к PG */
+	
 	let value = $state("");
 
-	/* user приходит из load() → { data } */
+	
 	let { data } = $props();
 	const companyId = data.user?.companyId ?? "";
 
-	/* загрузка файла */
+	
 	let fileInput: HTMLInputElement;
 	let busy = false;
 	let uploadedName = "";
@@ -24,7 +24,7 @@
 
 		busy = true;
 
-		/* --------- сюда добавили companyId --------- */
+		
 		const form = new FormData();
 		form.append("file", file);
 		form.append("companyId", companyId);      // 👈 главное изменение

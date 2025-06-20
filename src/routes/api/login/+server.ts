@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import prisma from '$lib/server/prisma';
 import { createJwt } from '$lib/server/auth';
 
-/** POST /api/login */
+
 export const POST: RequestHandler = async ({ request, cookies }) => {
 	// 1. читаем данные из запроса
 	const { name, password } = (await request.json()) as {

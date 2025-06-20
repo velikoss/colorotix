@@ -40,22 +40,22 @@
 
 	let sortedData = $derived([...props.data].sort((a, b) => getValue(a) - getValue(b)));
 
-	// Create color scale with stops for each data point
+
 	let colorScale = $derived(
 		scaleLinear()
-			.domain([0, sortedData.length - 1]) // Map array indices to colors
+			.domain([0, sortedData.length - 1])
 			.range(["#000000", "#6BFCBA"])
 	);
 
-	// Create arcs from SORTED data
+
 	let arcs = $derived(pie().padAngle(0.01).value(getValue)(sortedData));
 
-	// Tooltip state
+
 	let tooltip = $state({ visible: false, x: 0, y: 0, content: "" });
 
 	function showTooltip(event: MouseEvent, arc: any) {
 		tooltip.visible = true;
-		tooltip.x = event.offsetX + 5; // Offset to avoid cursor overlap
+		tooltip.x = event.offsetX + 5;
 		tooltip.y = event.offsetY + 5;
 		tooltip.content = `${(translations[arc.data[props.color]] as string)}: ${parseFloat(arc.data[props.value]).toFixed(2)}`;
 	}
@@ -112,7 +112,7 @@
 </div>
 
 <style>
-	/* Optional: Style the tooltip for better appearance */
+	
 	:global(.tooltip) {
 		background: rgba(0, 0, 0, 0.8);
 		color: white;

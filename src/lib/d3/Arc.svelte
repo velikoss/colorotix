@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { arc } from 'd3-shape';
 
-	// Define props with event handlers for TypeScript
+
 	let {
 		innerRadius = 0,
 		outerRadius = 0,
@@ -13,7 +13,7 @@
 		stroke = 'black',
 		style = '',
         index = 0,
-		// Forward mouse event handlers
+	
 		onmouseover = (event: MouseEvent) => {},
 		onmousemove = (event: MouseEvent) => {},
 		onmouseout = (event: MouseEvent) => {}
@@ -32,7 +32,7 @@
 		onmouseout?: (event: MouseEvent) => void;
 	}>();
 
-	// Reactive path computation
+
 	let path = $derived(
 		arc()
 			.innerRadius(innerRadius)
@@ -58,7 +58,7 @@
 {/if}
 
 <style>
-	/* Optional: Add hover effect for visual feedback */
+	
 	:global(.Arc) {
 		transition: opacity 0.2s;
 	}

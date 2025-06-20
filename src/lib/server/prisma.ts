@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 declare global {
-  // в dev-режиме предотвращаем дубли клиентов
+ 
   var __prisma: PrismaClient | undefined;
 }
 

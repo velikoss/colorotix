@@ -7,7 +7,7 @@
     label = undefined,
     formatTick = (d: any) => d,
     tickLength = 6,
-    numberOfTicks = 6, // Keep for y-axis, reduce for x-axis
+    numberOfTicks = 6,
     hideAxisLine = false,
     hideTicks = false,
     tickValues = [],
@@ -29,22 +29,18 @@
     style?: string;
   }>();
 
-  const { dimensions } = getContext('Chart'); // Assuming plain object for now
+  const { dimensions } = getContext('Chart');
   let ticks = $derived(
     tickValues.length
       ? tickValues
       : orientation === 'x'
-      ? scale.ticks ? scale.ticks(5) : scale.domain() // Reduce to 5 ticks for x-axis
+      ? scale.ticks ? scale.ticks(5) : scale.domain()
       : scale.ticks
       ? scale.ticks(numberOfTicks)
-      : scale.domain(), // Keep 6 for y-axis
+      : scale.domain(),
   );
 
   let padding = $derived(scale.bandwidth ? scale.bandwidth() / 2 : 0);
-
-  $effect(() => {
-    console.log(`${orientation} ticks:`, ticks);
-  });
 </script>
 
 <g
@@ -90,8 +86,8 @@
     <text
       class="Axis__label"
       style="transform: translate({(orientation === 'x'
-        ? [dimensions.innerWidth / 2, 50] // Increased for x-axis label
-        : [-50, dimensions.innerHeight / 2] // Increased for y-axis label
+        ? [dimensions.innerWidth / 2, 50]
+        : [-50, dimensions.innerHeight / 2]
       )
         .map((d) => d + 'px')
         .join(', ')}) {orientation === 'y' ? 'rotate(-90deg)' : ''}"
@@ -108,7 +104,7 @@
   }
   .Axis__tick {
     fill: var(--colors-grid, #FFFFFF);
-    font-size: 12px;
+    font-size: 10px;
   }
   .Axis__label {
     fill: var(--colors-grid, #FFFFFF);

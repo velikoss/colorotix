@@ -6,11 +6,11 @@
 
 </script>
 
-<div class="relative w-[48rem] h-94 flex flex-row justify-between">
+<div class="relative w-[48rem] h-94 flex flex-row justify-between col-span-2">
     <div class="absolute left-1/3 h-94 bg-black w-60 z-0"></div>
     <Widget />
     <Widget />
-    <div class="absolute w-full h-full">
+    <div class={twMerge("absolute w-full h-full", style)}>
         {@render children()}
     </div>
 </div>

@@ -2,10 +2,7 @@
 import prisma from '$lib/server/prisma';         // ⬅ singleton-инстанс Prisma
 import { json, error, type RequestHandler } from '@sveltejs/kit';
 
-/**
- * POST /api/pg-credentials
- * Сохраняем строку подключения к Postgres текущего пользователя
- */
+
 export const POST: RequestHandler = async ({ request, locals }) => {
 	// ─── 1. Авторизация ─────────────────────────────────────────────────────────
 	const { user } = locals as App.Locals;            // типизированный locals из app.d.ts

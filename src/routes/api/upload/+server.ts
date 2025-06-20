@@ -3,7 +3,7 @@ import { error, json } from '@sveltejs/kit';
 import { Client } from 'ssh2';
 import type { ConnectConfig } from 'ssh2';
 
-/* SSH config from .env */
+
 const SSH_HOST = process.env.SSH_HOST ?? '127.0.0.1';
 const SSH_PORT = Number(process.env.SSH_PORT ?? '22');
 const SSH_USER = process.env.SSH_USER ?? 'uploader';

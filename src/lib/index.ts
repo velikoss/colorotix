@@ -1,11 +1,11 @@
-// place files you want to import through the `$lib` alias in this folder.
+
 
 export function formatNumber(num: any) {
     if (num === null || num === undefined || isNaN(num)) return '0';
-    
+
     const absNum = Math.abs(num);
     let formatted;
-    
+
     if (absNum >= 1000000000) {
         formatted = (num / 1000000000).toFixed(1) + 'Ч';
     } else if (absNum >= 1000000) {
@@ -15,10 +15,10 @@ export function formatNumber(num: any) {
     } else {
         formatted = num.toString();
     }
-    
-    // Remove .0 if it exists after formatting (e.g., 1.0k → 1k)
+
+   
     formatted = formatted.replace(/\.0([kmb])/, '1');
-    
+
     return formatted;
 }
 
@@ -69,3 +69,56 @@ export const translations = {
     'pharma_licenses': 'Расходы на лицензии по перевозке лекарственных препаратов',
     'bucket_parts': 'Расходы на зубья ковшей экскаваторов',
 };
+
+export interface ChartData {
+    category: string;
+    subcategory: string;
+    value: number;
+}
+
+export function transformToChartData(
+    data: Record<string, any>,
+    valueKeys?: string[]
+): ChartData[] {
+    const result: ChartData[] = [];
+    for (const [category, values] of Object.entries(data)) {
+        if (typeof values === 'object' && valueKeys && valueKeys.length > 0) {
+           
+            for (const key of valueKeys) {
+                result.push({
+                    category,
+                    subcategory: key,
+                    value: Number(values[key] || 0),
+                });
+            }
+        } else {
+           
+            result.push({
+                category,
+                subcategory: 'value',
+                value: Number(values || 0),
+            });
+        }
+    }
+    return result;
+}
+
+export function transformToChartDataForVehicles(data: Record<string, any>): ChartData[] {
+  const result: ChartData[] = [];
+  let totalDaysUsed = 0;
+  let totalDistance = 0;
+
+ 
+  for (const values of Object.values(data)) {
+    if (typeof values === 'object' && values !== null) {
+      totalDaysUsed += Number(values.days_used || 0);
+      totalDistance += Number(values.total_distance || 0);
+    }
+  }
+
+ 
+  result.push({ category: "Total Vehicles", subcategory: "days_used", value: totalDaysUsed });
+  result.push({ category: "Total Vehicles", subcategory: "total_distance", value: totalDistance });
+
+  return result;
+}
