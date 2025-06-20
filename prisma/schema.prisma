@@ -17,6 +17,7 @@ model User {
   companyType  String?
   companyId    String?  @map("companyid")
   createdAt    DateTime @default(now()) @db.Timestamptz(6) @map("createdat")
+  yearBudget   Int
 
   @@map("users")   // имя таблицы в БД
 }
