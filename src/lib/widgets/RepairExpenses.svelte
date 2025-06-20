@@ -13,7 +13,8 @@
 
 <div class="hidden md:block col-span-2">
     <MonthYearPickerWide data={repair_expenses_by_month_year} bind:currentMonth bind:currentYear>
-        <Treemap height={324} data={repair_expenses_by_month_year[currentYear][currentMonth].structure} />
+        <p class="text-xl text-center mb-2 -mt-2">Структура трат</p>
+        <Treemap height={290} data={repair_expenses_by_month_year[currentYear][currentMonth].structure} />
     </MonthYearPickerWide>
 </div>
 <div class="block md:hidden col-span-1">

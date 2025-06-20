@@ -19,5 +19,6 @@
     bind:currentYear
     showMonthPicker={true}
 >
+    <div class="text-xl text-center w-full">Статистика простоя</div>
     <DataTable data={downtime[currentYear]?.[currentMonth] || {}} {columns} />
 </MonthYearPicker>

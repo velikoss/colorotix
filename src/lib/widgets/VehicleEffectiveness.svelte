@@ -18,5 +18,6 @@
     bind:currentYear
     showMonthPicker={false}
 >
+    <div class="text-xl text-center w-full">Эффективность машин</div>
     <DataTable data={vehicle_efficiency_per_year[currentYear] || {}} {columns} />
 </MonthYearPicker>

@@ -37,7 +37,7 @@
 </script>
 
 <Widget style="flex-col text-white gap-4 pt-6">
-    <p class="text-2xl font-semibold">Структурные расходы</p>
+    <p class="text-2xl font-semibold">Структура расходов</p>
     <Arcs data={data} color="category" value="value"/>
     <p 
         class="absolute inset-auto pt-[50px] text-white text-3xl font-bold cursor-pointer"

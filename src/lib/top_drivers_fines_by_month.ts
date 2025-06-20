@@ -1,4 +1,4 @@
-{
+export const top_drivers_fines_by_month = {
     "2019": {
         "01": {
             "Вишнякова Евпраксия Аркадьевна": {

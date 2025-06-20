@@ -23,7 +23,7 @@
 </script>
 
 <Widget style="flex-col justify-center text-white gap-4 pt-12">
-    <p class="text-3xl font-semibold">Текущий план</p>
+    <p class="text-3xl font-semibold">Текущие расходы</p>
     <p class="text-7xl font-semibold">{Number(expenses_data.expenses_related_plan*100).toFixed(2)}%</p>
     <div
 		class="w-full h-full"

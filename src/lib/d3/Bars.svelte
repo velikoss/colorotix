@@ -1,7 +1,7 @@
 <script lang="ts">
   import { max } from 'd3-array';
   import { scaleLinear, scaleBand, scaleOrdinal } from 'd3-scale';
-  import { transformToChartData, type ChartData } from '$lib';
+  import { transformToChartData, translations, type ChartData } from '$lib';
   import Chart from './Chart.svelte';
   import Bar from './Bar.svelte';
   import Axis from './Axis.svelte';
@@ -100,7 +100,7 @@
     tooltip.visible = true;
     tooltip.x = event.offsetX + 5;
     tooltip.y = event.offsetY - 20;
-    tooltip.content = `${datum.subcategory != "value" ? datum.subcategory : datum.category}: ${datum.value}`;
+    tooltip.content = `${datum.subcategory != "value" ? translations[datum.subcategory] : (translations[datum.category] ? translations[datum.category] : datum.category)}: ${datum.value}`;
   }
 
   function moveTooltip(event: MouseEvent) {
