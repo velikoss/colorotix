@@ -1,11 +1,10 @@
 <script>
-    import Widget from "$lib/breadcrumps/Widget.svelte";
     import Bagel from "$lib/widgets/Bagel.svelte";
     import Plot from "$lib/widgets/Plot.svelte";
     import MonthStatistics from "$lib/widgets/MonthStatistics.svelte";
     import Plan from "$lib/widgets/Plan.svelte";
-    import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
     import CustomGraph from "$lib/widgets/CustomGraph.svelte";
+    import CoolCat from "$lib/widgets/CoolCat.svelte";
 
     let { data } = $props();
 
@@ -16,4 +15,4 @@
 <Plan />
 <MonthStatistics />
 <CustomGraph type={data.user.companyType} />
-<WidgetWide><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F67%2F12%2F25%2F671225ca634638262d4a2580accd7a37.jpg&f=1&nofb=1&ipt=3d8462b9b9f803126b2990a8bbe970a864c0c4bcd5759b8877d71c6988e09b8f" alt="" class="object-scale-down h-92 pl-26 pt-2"></WidgetWide>
+<CoolCat />

@@ -133,7 +133,4 @@
 			       placeholder:text-gray-200 backdrop-blur-sm shadow shadow-white/5"
 		/>
 	</div>
-
-	<!-- ======== отладка ======== -->
-	<p class="text-xs opacity-60">{JSON.stringify(data.user)}</p>
 </div>
