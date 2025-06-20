@@ -46,8 +46,7 @@
         innerWidth: Math.max(width - margins.left - margins.right, 0),
         innerHeight: Math.max(height - margins.top - margins.bottom, 0),
       });
-      console.log('Resize:', { width, height });
-    });
+          });
     observer.observe(node);
     return {
       destroy() {
@@ -114,11 +113,6 @@
 
   let innerWidth = $derived($dimensionsStore.innerWidth);
   let innerHeight = $derived($dimensionsStore.innerHeight);
-
-  $effect(() => {
-    console.log('xScale domain:', xScale.domain(), 'range:', xScale.range());
-    console.log('yScale domain:', yScale.domain(), 'range:', yScale.range());
-  });
 </script>
 
 <div class="w-full h-full flex flex-col" use:resize>
@@ -158,7 +152,9 @@
           />
         {/each}
       {/if}
-      <Axis orientation="x" scale={xScale} formatTick={xFormat} label="" />
+      <g transform="translate(0, {innerHeight})">
+        <Axis orientation="x" scale={xScale} formatTick={xFormat} label="" />
+      </g>
       <Axis orientation="y" scale={yScale} formatTick={yFormat} label="" />
       <rect
         width={innerWidth}

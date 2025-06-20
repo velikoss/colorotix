@@ -5,12 +5,7 @@ import { randomUUID } from "crypto";
 // ID вашего Airflow‑пайплайна
 const DAG_ID = "etl_crm_erp_pipeline_sqlalchemy_COPY_no_limits";
 
-/**
- * Каждый раз, когда SSR‑страница дашборда загружается, мы триггерим
- * соответствующий DAG в Airflow, передавая:
- *   – client_id  (из query‑строки или случайный)
- *   – company_id (из data.user, проброшенного из layout)
- */
+
 export const load: PageServerLoad = async ({ fetch, url, parent }) => {
   // 1) Получаем данные пользователя из layout‑loader'а
   const { user } = await parent();
@@ -59,5 +54,6 @@ export const load: PageServerLoad = async ({ fetch, url, parent }) => {
     status: "ok" as const,
     dagRun,
     companyId,
+    user
   };
 };

@@ -5,6 +5,9 @@
     import MonthStatistics from "$lib/widgets/MonthStatistics.svelte";
     import Plan from "$lib/widgets/Plan.svelte";
     import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
+    import CustomGraph from "$lib/widgets/CustomGraph.svelte";
+
+    let { data } = $props();
 
 </script>
 
@@ -12,3 +15,5 @@
 <Plot />
 <Plan />
 <MonthStatistics />
+<CustomGraph type={data.user.companyType} />
+<WidgetWide>.</WidgetWide>

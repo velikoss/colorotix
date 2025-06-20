@@ -7,10 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/*
-  На стороне БД остаётся таблица **users**  
-  (camelCase-поля мапятся на существующие snake_case-колонки).
-*/
+
 model User {
   id           Int      @id @default(autoincrement())
   email        String   @unique

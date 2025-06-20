@@ -33,8 +33,7 @@
     }
 
     onMount(() => {
-        console.log(data);
-    })
+            })
 </script>
 
 <Widget style="flex-col text-white gap-4 pt-6">
