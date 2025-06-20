@@ -5,7 +5,7 @@ import prisma from '$lib/server/prisma';
 const crypto = await import('crypto');
 
 export const POST: RequestHandler = async ({ request }) => {
-  const { name, password, companyname, innnumber, companyType } = await request.json();
+  const { name, password, companyname, innnumber, companyType, yearBudget } = await request.json();
 
   if (!name || !password || !companyname || !innnumber) {
     return json({ error: 'Заполните все поля' }, { status: 400 });
@@ -33,7 +33,8 @@ export const POST: RequestHandler = async ({ request }) => {
       companyName: companyname,
       inn: innnumber,
       companyId: clientId,
-      companyType
+      companyType,
+      yearBudget: 1000000000
     }
   });
 
