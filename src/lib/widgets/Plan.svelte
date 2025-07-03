@@ -24,7 +24,7 @@
 
 <Widget style="flex-col justify-center text-white gap-4 pt-12">
     <p class="text-3xl font-semibold">Текущие расходы</p>
-    <p class="text-7xl font-semibold">{Number(expenses_data["2025"].all_expenses/expenses_data["2025"].expenses_related_plan).toFixed(2)}%</p>
+    <p class="text-7xl font-semibold">{Number(expenses_data["2025"].expenses_related_plan*100).toFixed(2)}%</p>
     <div
 		class="w-full h-full"
 		bind:clientWidth={width}
@@ -48,7 +48,7 @@
                     innerRadius={120 * 0.5}
                     outerRadius={120}
                     startAngle={-Math.PI/2}
-                    endAngle={Math.min((expenses_data["2025"].all_expenses/expenses_data["2025"].expenses_related_plan/100) * Math.PI - Math.PI / 2, Math.PI / 2)}
+                    endAngle={Math.min((expenses_data["2025"].expenses_related_plan) * Math.PI - Math.PI / 2, Math.PI / 2)}
                     cornerRadius={0}
                     padAngle={0} 
                 />
