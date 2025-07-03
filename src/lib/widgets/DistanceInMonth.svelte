@@ -1,7 +1,7 @@
 <script>
     import MonthYearPickerWide from "$lib/breadcrumps/MonthYearPickerWide.svelte";
     import Bars from "$lib/d3/Bars.svelte";
-    import { fuel_km_per_month } from "$lib/fuel_km_per_month";
+    let {data: fuel_km_per_month} = $props();
     
     let currentMonth = $state("03");
     let currentYear = $state(2023);

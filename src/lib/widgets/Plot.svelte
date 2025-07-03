@@ -2,7 +2,7 @@
     import Multiline from "$lib/d3/Multiline.svelte";
     import Widget from "$lib/breadcrumps/Widget.svelte";
     import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
-    import { expenses_analisys_results } from "$lib/expenses_analysis_results";
+    let { data: expenses_analisys_results } = $props();
 
    
     const { data } = expenses_analisys_results;

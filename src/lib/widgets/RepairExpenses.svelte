@@ -4,7 +4,7 @@
     import Widget from "$lib/breadcrumps/Widget.svelte";
     import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
     import Treemap from "$lib/d3/Treemap.svelte";
-    import { repair_expenses_by_month_year } from "$lib/repair_expenses_by_month_year"
+    let { data: repair_expenses_by_month_year } = $props();
     
     let currentMonth = $state("03")
     let currentYear = $state(2023)

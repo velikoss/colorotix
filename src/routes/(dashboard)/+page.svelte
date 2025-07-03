@@ -10,9 +10,9 @@
 
 </script>
 
-<Bagel />
-<Plot />
-<Plan />
-<MonthStatistics />
-<CustomGraph type={data.user.companyType} />
+{#if data.jsons.expenses_data}<Bagel data={data.jsons.expenses_data} />{/if}
+{#if data.jsons.expenses_analisys_results}<Plot data={data.jsons.expenses_analisys_results}/>{/if}
+{#if data.jsons.expenses_data}<Plan data={data.jsons.expenses_data} />{/if}
+{#if data.jsons.fuel_km_per_month}<MonthStatistics data={data.jsons.fuel_km_per_month}/>{/if}
+<CustomGraph type={data.user.companyType} propData={data.jsons} />
 <CoolCat />

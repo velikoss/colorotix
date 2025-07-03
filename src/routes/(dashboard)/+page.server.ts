@@ -1,12 +1,13 @@
 import type { PageServerLoad } from "./$types";
 import { AIRFLOW_HOST, AIRFLOW_USER, AIRFLOW_PASSWORD } from "$env/static/private";
 import { randomUUID } from "crypto";
+import prisma from "$lib/server/prisma";
 
 // ID вашего Airflow‑пайплайна
 const DAG_ID = "etl_crm_erp_pipeline_sqlalchemy_COPY_no_limits";
 
 
-export const load: PageServerLoad = async ({ fetch, url, parent }) => {
+export const load: PageServerLoad = async ({ fetch, url, parent, locals }) => {
   // 1) Получаем данные пользователя из layout‑loader'а
   const { user } = await parent();
   const companyId: string | undefined = user?.companyId;
@@ -50,10 +51,23 @@ export const load: PageServerLoad = async ({ fetch, url, parent }) => {
     state: string;
   };
 
+  const jsons = await prisma.fraudJson.findMany({
+        where: {
+            client_id: locals.user.companyId,
+        }
+    });
+
+  const transformed = jsons.reduce((acc, item) => {
+      acc[item.analysis_type] = item.result;
+      return acc;
+  }, {} as Record<string, any>);
+
   return {
     status: "ok" as const,
     dagRun,
     companyId,
-    user
+    user,
+    jsons: transformed
   };
 };
+

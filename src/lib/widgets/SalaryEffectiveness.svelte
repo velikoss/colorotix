@@ -1,6 +1,6 @@
 <script>
     import MonthYearPickerWide from "$lib/breadcrumps/MonthYearPickerWide.svelte";
-    import { top_drivers_salary_efficiency } from "$lib/top_drivers_salary_efficiency";
+    let { data: top_drivers_salary_efficiency } = $props();
     import DataTable from "./DataTable.svelte";
 
     let currentYear = $state(2023)

@@ -1,11 +1,8 @@
 <script>
     import MonthYearPicker from "$lib/breadcrumps/MonthYearPicker.svelte";
     import MonthYearPickerWide from "$lib/breadcrumps/MonthYearPickerWide.svelte";
-    import Widget from "$lib/breadcrumps/Widget.svelte";
-    import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
     import Bars from "$lib/d3/Bars.svelte";
-    import Treemap from "$lib/d3/Treemap.svelte";
-    import { amortization_by_month_year } from "$lib/amortization_by_month_year";
+    let { data: amortization_by_month_year } = $props();
 
     let currentMonth = $state("03");
     let currentYear = $state(2023);

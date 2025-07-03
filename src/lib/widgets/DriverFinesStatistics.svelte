@@ -1,6 +1,6 @@
 <script>
     import MonthYearPickerWide from "$lib/breadcrumps/MonthYearPickerWide.svelte";
-    import { top_drivers_fines_by_month } from "$lib/top_drivers_fines_by_month";
+    let { data: top_drivers_fines_by_month } = $props();
     import DataTable from "./DataTable.svelte";
 
     let currentYear = $state(2023)

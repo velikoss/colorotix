@@ -1,7 +1,7 @@
 <script>
     import MonthYearPicker from "$lib/breadcrumps/MonthYearPicker.svelte";
     import DataTable from "./DataTable.svelte";
-    import { vehicle_efficiency_per_year } from "$lib/vehicle_efficiency_per_year";
+    let { data: vehicle_efficiency_per_year } = $props();
 
     let currentMonth = $state("03");
     let currentYear = $state(2023);
