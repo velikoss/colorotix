@@ -1,24 +1,19 @@
 <script>
     import MonthYearPicker from "$lib/breadcrumps/MonthYearPicker.svelte";
     import Bars from "$lib/d3/Bars.svelte";
-    import { building_expenses_by_month } from "$lib/building_expenses_by_month";
-    import { downtime } from "$lib/downtime";
-    import { logistic_expenses_by_month } from "$lib/logistic_expenses_by_month";
-    import { pharma_expenses_by_month } from "$lib/pharma_expenses_by_month";
-    import { vehicle_usage_by_month } from "$lib/vehicle_usage_by_month";
-
-    let { type } = $props();
-    const types = [
-        "Логистика",
-        "Фармацевтика",
-        "Строительство",
-        "Ритейл",
-        "Такси",
-        "Доставка",
-        "Автобусы",
-        "Каршеринг",
-        "Другое",
-    ];
+    let { type, propData } = $props();
+    // let type = "Фармацевтика";
+    const types = {
+        "Логистика": "Траты в месяц",
+        "Фармацевтика": "Траты в месяц",
+        "Строительство": "Количество трат",
+        "Ритейл": "Количество простоя",
+        "Такси": "Количество простоя",
+        "Доставка": "Количество простоя",
+        "Автобусы": "Количество простоя",
+        "Каршеринг": "Количество активных 🚗",
+        "Другое": "Количество простоя",
+    };
 
     function typeCheck(type) {
         return ["Логистика", "Фармацевтика", "Строительство"].includes(type);
@@ -27,19 +22,19 @@
     let data = $state();
     switch (type) {
         case "Логистика":
-            data = logistic_expenses_by_month;
+            data = propData.logistic_expenses_by_month;
             break;
         case "Фармацевтика":
-            data = pharma_expenses_by_month;
+            data = propData.pharma_expenses_by_month;
             break;
         case "Строительство":
-            data = building_expenses_by_month;
+            data = propData.building_expenses_by_month;
             break;
         case "Каршеринг":
-            data = vehicle_usage_by_month;
+            data = propData.vehicle_usage_by_month;
             break;
         default:
-            data = downtime;
+            data = propData.downtime;
             break;
     }
 
@@ -102,4 +97,5 @@
             {type}
         />
     {/if}
+    <div class="w-full text-center text-2xl pt-1">{types[type]}</div>
 </MonthYearPicker>

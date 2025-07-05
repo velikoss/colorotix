@@ -1,6 +1,6 @@
 <script>
     import MonthYearPicker from "$lib/breadcrumps/MonthYearPicker.svelte";
-    import { fuel_km_per_month } from "$lib/fuel_km_per_month";
+    let { data: fuel_km_per_month } = $props();
 
     let currentMonth = $state("05");
     let currentYear = $state(2023);

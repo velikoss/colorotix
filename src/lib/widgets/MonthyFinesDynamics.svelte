@@ -2,7 +2,7 @@
     import MonthYearPicker from "$lib/breadcrumps/MonthYearPicker.svelte";
     import MonthYearPickerWide from "$lib/breadcrumps/MonthYearPickerWide.svelte";
     import Bars from "$lib/d3/Bars.svelte";
-    import { seasonal_fines } from "$lib/seasonal_fines";
+    let { data: seasonal_fines } = $props();
     
     let currentYear = $state(2023);
 

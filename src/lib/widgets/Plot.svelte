@@ -2,7 +2,7 @@
     import Multiline from "$lib/d3/Multiline.svelte";
     import Widget from "$lib/breadcrumps/Widget.svelte";
     import WidgetWide from "$lib/breadcrumps/WidgetWide.svelte";
-    import { expenses_analisys_results } from "$lib/expenses_analysis_results";
+    let { data: expenses_analisys_results } = $props();
 
    
     const { data } = expenses_analisys_results;
@@ -86,9 +86,9 @@
     };
 
     const margins2 = {
-        top: 40,
+        top: 20,
         right: 40,
-        bottom: 40,
+        bottom: 100,
         left: 80,
     };
 
@@ -103,6 +103,7 @@
 
 <div class="hidden md:block col-span-2">
     <WidgetWide style="">
+        <p class="text-2xl font-semibold text-center text-white pt-5">Расходы во времени</p>
         <Multiline
             data={data1}
             x="date"

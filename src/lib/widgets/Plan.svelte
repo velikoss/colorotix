@@ -2,7 +2,7 @@
     import Arc from "$lib/d3/Arc.svelte";
     import Chart from "$lib/d3/Chart.svelte";
     import Widget from "$lib/breadcrumps/Widget.svelte";
-    import { expenses_data } from "$lib/expenses_data";
+    let { data: expenses_data } = $props();
 
     let width = $state(0);
 	let height = $state(0);
@@ -23,8 +23,8 @@
 </script>
 
 <Widget style="flex-col justify-center text-white gap-4 pt-12">
-    <p class="text-3xl font-semibold">Текущий план</p>
-    <p class="text-7xl font-semibold">{Number(expenses_data.expenses_related_plan*100).toFixed(2)}%</p>
+    <p class="text-3xl font-semibold">Текущие расходы</p>
+    <p class="text-7xl font-semibold">{Number(expenses_data["2025"].expenses_related_plan*100).toFixed(2)}%</p>
     <div
 		class="w-full h-full"
 		bind:clientWidth={width}
@@ -48,7 +48,7 @@
                     innerRadius={120 * 0.5}
                     outerRadius={120}
                     startAngle={-Math.PI/2}
-                    endAngle={Math.min(expenses_data.expenses_related_plan * Math.PI - Math.PI / 2, Math.PI / 2)}
+                    endAngle={Math.min((expenses_data["2025"].expenses_related_plan) * Math.PI - Math.PI / 2, Math.PI / 2)}
                     cornerRadius={0}
                     padAngle={0} 
                 />

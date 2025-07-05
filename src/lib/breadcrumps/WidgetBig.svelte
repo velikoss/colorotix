@@ -6,18 +6,18 @@
 
 </script>
 
-<div class="relative w-[48rem] h-[48rem] flex flex-row justify-between col-span-2 row-span-2">
-    <div class="absolute left-1/3 h-[47rem] bg-black w-60 z-0"></div>
-    <div class="absolute top-1/3 w-[48rem] h-60 bg-black z-0"></div>
-    <div>
+<div class={twMerge("w-192 h-92 clip flex justify-center items-center overflow-visible p-8 relative col-span-2", style)}>
+    <div class="absolute z-0 flex flex-row inset-x-0 -mt-4">
         <Widget />
         <Widget />
     </div>
-    <div>
-        <Widget />
-        <Widget />
-    </div>
-    <div class={twMerge("absolute w-full h-full", style)}>
-        {@render children()}
-    </div>
+    <div class="absolute left-1/3 h-94 bg-black w-60 z-0 -mt-4"></div>
+    {#if children}
+        <div class="relative h-92">
+            {@render children()}
+        </div>
+    {/if}
 </div>
+
+<style>
+</style>

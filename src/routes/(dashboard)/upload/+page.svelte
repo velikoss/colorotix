@@ -154,7 +154,4 @@
 			Сохранить подключение
 		</button>
 	</div>
-
-	<!-- ======== отладка ======== -->
-	<p class="text-xs opacity-60">{JSON.stringify(data.user)}</p>
 </div>

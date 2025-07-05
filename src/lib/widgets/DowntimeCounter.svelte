@@ -1,7 +1,7 @@
 <script>
     import MonthYearPicker from "$lib/breadcrumps/MonthYearPicker.svelte";
     import DataTable from "./DataTable.svelte";
-    import { downtime } from "$lib/downtime";
+    let { data: downtime } = $props();
 
     let currentMonth = $state("03");
     let currentYear = $state(2023);
@@ -19,5 +19,6 @@
     bind:currentYear
     showMonthPicker={true}
 >
+    <div class="text-xl text-center w-full">Статистика простоя</div>
     <DataTable data={downtime[currentYear]?.[currentMonth] || {}} {columns} />
 </MonthYearPicker>
