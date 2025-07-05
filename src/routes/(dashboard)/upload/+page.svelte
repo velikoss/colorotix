@@ -60,6 +60,20 @@
 
 		res.ok ? alert("Бюджет сохранён") : alert(await res.text());
 	}
+
+	async function savePgURL() {
+
+		const res = await fetch("/api/save-pg", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				pgUrl,
+				companyId,
+			}),
+		});
+
+		res.ok ? alert("Данные сохранены") : alert(await res.text());
+	}
 </script>
 
 <div class="w-full h-[calc(100svh-8rem)] flex flex-col justify-center items-center gap-6">
@@ -132,6 +146,13 @@
 			       bg-white/10 focus:border-black/80 focus:ring-black/30
 			       placeholder:text-gray-200 backdrop-blur-sm shadow shadow-white/5"
 		/>
+		<button
+			on:click={savePgURL}
+			class="mt-2 px-4 py-2 bg-white/10 rounded-lg border border-white/30
+			       hover:border-white/60 transition-all disabled:opacity-40"
+		>
+			Сохранить подключение
+		</button>
 	</div>
 
 	<!-- ======== отладка ======== -->

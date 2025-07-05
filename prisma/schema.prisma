@@ -7,17 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  passwordHash String   @map("passwordhash")
-  companyName  String?  @map("companyname")
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String    @map("passwordhash")
+  companyName  String?   @map("companyname")
   inn          String?
+  companyId    String?   @map("companyid")
+  createdAt    DateTime? @default(now()) @map("createdat") @db.Timestamptz(6)
   companyType  String?
-  companyId    String?  @map("companyid")
-  createdAt    DateTime @default(now()) @db.Timestamptz(6) @map("createdat")
-  yearBudget   Int
+  yearBudget   Int?
+  postgresData String?
 
-  @@map("users")   // имя таблицы в БД
+  @@map("users")
 }
