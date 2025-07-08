@@ -20,6 +20,7 @@ model User {
   companyId    String?  @map("companyid")
   createdAt    DateTime @default(now()) @db.Timestamptz(6) @map("createdat")
   yearBudget   Int
+  postgresData String
 
   @@map("users")   // имя таблицы в БД
   @@schema("web")
