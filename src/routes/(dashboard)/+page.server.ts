@@ -35,21 +35,21 @@ export const load: PageServerLoad = async ({ fetch, url, parent, locals }) => {
   if (!dagRunRes.ok) {
     const errorText = await dagRunRes.text();
     console.error("Failed to trigger Airflow DAG", dagRunRes.status, errorText);
-    return {
-      status: "error" as const,
-      error: {
-        status: dagRunRes.status,
-        message: errorText,
-      },
-    };
+    // return {
+    //   status: "error" as const,
+    //   error: {
+    //     status: dagRunRes.status,
+    //     message: errorText,
+    //   },
+    // };
   }
 
   // 6) Возвращаем info о только что запущенном DAG‑ранe
-  const dagRun = (await dagRunRes.json()) as {
+  const dagRun = dagRunRes.ok ? (await dagRunRes.json()) as {
     dag_run_id: string;
     execution_date: string;
     state: string;
-  };
+  } : {};
 
   const jsons = await prisma.fraudJson.findMany({
         where: {

@@ -3,9 +3,9 @@
 	import TextIconH from "$lib/breadcrumps/TextIconH.svelte";
 	import { goto } from "$app/navigation";
 	import "../../app.css";
-	import { recommendations } from "$lib/recommendations";
 
 	let { children, data } = $props();
+	const recommendations = data.recomendations?.result;
 	let accountDropdown = $state(false);
 	let notificationsDropdown = $state(false);
 	let accWidth = $state(0);
@@ -191,6 +191,7 @@
 				text="Расходы на обслуживание"
 				href="/expenses"
 			/>
+			{#if data.user.companyType !== "Каршеринг"}
 			<TextIconH
 				style="border-black w-14 h-14"
 				width="80%"
@@ -198,6 +199,7 @@
 				text="Штрафы и ЗП"
 				href="/salary"
 			/>
+			{/if}
 			<TextIconH
 				style="border-black w-14 h-14"
 				width="80%"
