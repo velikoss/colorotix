@@ -91,7 +91,7 @@
 		/>
 
 		<button
-			on:click={saveBudget}
+			onclick={() => saveBudget()}
 			class="mt-2 px-4 py-2 bg-white/10 rounded-lg border border-white/30
 			       hover:border-white/60 transition-all disabled:opacity-40"
 		>
@@ -111,7 +111,7 @@
 			<p class="text-sm">Поддерживаемые форматы: .json, .xlsx, .csv</p>
 
 			<button
-				on:click={openFileDialog}
+				onclick={() => openFileDialog()}
 				disabled={busy}
 				class="mt-2 px-4 py-2 bg-white/10 rounded-lg border border-white/30
 				       hover:border-white/60 transition-all disabled:opacity-40"
@@ -126,7 +126,7 @@
 			accept=".json,.xlsx,.csv"
 			class="hidden"
 			bind:this={fileInput}
-			on:change={handleFileChange}
+			onchange={handleFileChange}
 		/>
 	</Widget>
 
@@ -147,7 +147,7 @@
 			       placeholder:text-gray-200 backdrop-blur-sm shadow shadow-white/5"
 		/>
 		<button
-			on:click={savePgURL}
+			onclick={() => savePgURL()}
 			class="mt-2 px-4 py-2 bg-white/10 rounded-lg border border-white/30
 			       hover:border-white/60 transition-all disabled:opacity-40"
 		>
