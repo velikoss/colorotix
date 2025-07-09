@@ -2,7 +2,7 @@
 
 ![](./static/website.png)
 *SvelteKit masterpiece.*<br>
-try it [here](эврика.великосс.рф) (demo account: gol@gol.gol:golgolgol)
+try it [here](https://эврика.великосс.рф) (demo account: gol@gol.gol:golgolgol)
 
 ## .env
 
