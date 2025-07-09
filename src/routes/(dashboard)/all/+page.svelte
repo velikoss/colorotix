@@ -41,7 +41,7 @@
 {#if data.jsons.seasonal_fines}<MonthyFinesDynamics data={data.jsons.seasonal_fines}/>{/if}
 {#if data.jsons.top_drivers_fines_by_month}<DriverFinesStatistics data={data.jsons.top_drivers_fines_by_month}/>{/if}
 {#if data.jsons.salary_data}<SalaryStatistics data={data.jsons.salary_data}/>{/if}
-{#if data.jsons.top_drivers_salary_efficiency}}<SalaryEffectiveness data={data.jsons.top_drivers_salary_efficiency} />{/if}
+{#if data.jsons.top_drivers_salary_efficiency}<SalaryEffectiveness data={data.jsons.top_drivers_salary_efficiency} />{/if}
 {#if data.jsons.seasonal_fines}<MaxSeasonFine data={data.jsons.seasonal_fines}/>{/if}
 <CoolCat2 />
 {#if data.jsons.fuel_km_per_month}<FuelInMonth data={data.jsons.fuel_km_per_month} />{/if}
